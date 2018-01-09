@@ -44,7 +44,7 @@ class Character(BaseModel):
     age = IntegerField(constraints=[Check('age > 0')])
     height_ft = IntegerField(constraints=[Check('height_ft < 30'), Check('height_ft >= 0')])
     height_in = IntegerField(constraints=[Check('height_in < 12'), Check('height_in >= 0')])
-    weight = FloatField(constraints=[Check('0 < weight < 1000')])
+    weight = FloatField(constraints=[Check('weight < 1000'), Check('weight > 0')])
     hair_color = CharField()
     eye_color = CharField()
 

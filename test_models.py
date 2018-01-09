@@ -131,3 +131,43 @@ def test_character_creation_ht_in_constraint(database):
                 eye_color='brown'
             )
     assert 'CHECK constraint failed: character' in str(excinfo.value)
+
+
+def test_character_creation_wt_constraint(database):
+    with pytest.raises(IntegrityError) as excinfo:
+        with database.transaction():
+            # Create character that is too heavy
+            character1 = Character.create(
+                character_name='Qritz1',
+                player_name='Avery',
+                alignment='CG',
+                race='elf',
+                size='md',
+                gender='male',
+                age='29',
+                height_ft='5',
+                height_in='4',
+                weight='1009',
+                hair_color='black',
+                eye_color='brown'
+            )
+    assert 'CHECK constraint failed: character' in str(excinfo.value)
+
+    with pytest.raises(IntegrityError) as excinfo:
+        with database.transaction():
+            # Create character that is too light
+            character2 = Character.create(
+                character_name='Qritz2',
+                player_name='Avery',
+                alignment='CG',
+                race='elf',
+                size='md',
+                gender='male',
+                age='29',
+                height_ft='5',
+                height_in='4',
+                weight='0',
+                hair_color='black',
+                eye_color='brown'
+            )
+    assert 'CHECK constraint failed: character' in str(excinfo.value)
