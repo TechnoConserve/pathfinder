@@ -1,3 +1,4 @@
+from peewee import IntegrityError
 from playhouse.sqlite_ext import SqliteExtDatabase
 import pytest
 
@@ -50,3 +51,43 @@ def test_character_creation_age_constraint(database):
             hair_color='black',
             eye_color='brown'
         )
+
+
+def test_character_creation_ht_ft_constraint(database):
+    with pytest.raises(IntegrityError) as excinfo:
+        with database.transaction():
+            # Create character that is too tall
+            character1 = Character.create(
+                character_name='Qritz1',
+                player_name='Avery',
+                alignment='CG',
+                race='elf',
+                size='md',
+                gender='male',
+                age='29',
+                height_ft='31',
+                height_in='4',
+                weight='109',
+                hair_color='black',
+                eye_color='brown'
+            )
+    assert 'CHECK constraint failed: character' in str(excinfo.value)
+
+    with pytest.raises(IntegrityError) as excinfo:
+        with database.transaction():
+            # Create character that is too small
+            character2 = Character.create(
+                character_name='Qritz2',
+                player_name='Avery',
+                alignment='CG',
+                race='elf',
+                size='md',
+                gender='male',
+                age='29',
+                height_ft='-1',
+                height_in='4',
+                weight='109',
+                hair_color='black',
+                eye_color='brown'
+            )
+    assert 'CHECK constraint failed: character' in str(excinfo.value)

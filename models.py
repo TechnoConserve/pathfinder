@@ -42,7 +42,7 @@ class Character(BaseModel):
     size = CharField(choices=SIZE_CHOICES)
     gender = CharField()
     age = IntegerField(constraints=[Check('age > 0')])
-    height_ft = IntegerField(constraints=[Check('0 < height_ft < 30')])
+    height_ft = IntegerField(constraints=[Check('height_ft < 30'), Check('height_ft >= 0')])
     height_in = IntegerField(constraints=[Check('0 < height_in < 12')])
     weight = FloatField(constraints=[Check('0 < weight < 1000')])
     hair_color = CharField()
