@@ -54,6 +54,6 @@ class Ability(BaseModel):
     strength = IntegerField()
 
 
-def create_tables():
-    db.connect()
-    db.create_tables([Character, Ability])
+def create_tables(database):
+    database.connect()
+    database.create_tables([Character, Ability], True)
