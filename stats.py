@@ -29,7 +29,7 @@ def classic_ability_gen():
     # Roll four six-sided die six times
     for score in range(6):
         print('Rolling three six-sided die...')
-        rolls = roll(num=3, sides=6)
+        rolls = roll(num_die=3, sides=6)
         print('Got:', rolls)
 
         result = sum(rolls)
@@ -48,7 +48,7 @@ def heroic_ability_gen():
     # Roll four six-sided die six times
     for score in range(6):
         print('Rolling two six-sided die...')
-        rolls = roll(num=2, sides=6)
+        rolls = roll(num_die=2, sides=6)
         print('Got:', rolls)
 
         result = sum(rolls)
@@ -68,7 +68,7 @@ def standard_ability_gen():
     # Roll four six-sided die six times
     for score in range(6):
         print('Rolling four six-sided die...')
-        rolls = roll(num=4, sides=6)
+        rolls = roll(num_die=4, sides=6)
         print('Got:', rolls)
 
         print('Dropping the lowest value...')
