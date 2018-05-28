@@ -1,7 +1,7 @@
 from random import randrange
 
 
-def roll(num_die, sides):
+def roll(sides, num_die=1):
     rolls = [randrange(1, sides) for die in range(num_die)]
     return rolls
 

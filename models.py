@@ -59,6 +59,17 @@ class Ability(BaseModel):
     charisma = IntegerField()
 
 
+class Combat(BaseModel):
+    initiative = IntegerField()
+    armor_class = IntegerField()
+    fortitude = IntegerField()
+    reflex = IntegerField()
+    will = IntegerField()
+    base_attack_bonus = IntegerField()
+    combat_maneuver_bonus = IntegerField()
+    combat_maneuver_defense = IntegerField()
+
+
 class Skill(BaseModel):
     character = ForeignKeyField(Character)
     acrobatics = IntegerField()
@@ -111,4 +122,4 @@ class Skill(BaseModel):
 
 def create_tables(database):
     database.connect()
-    database.create_tables([Character, Ability], True)
+    database.create_tables([Character, Ability, Combat, Skill], True)
